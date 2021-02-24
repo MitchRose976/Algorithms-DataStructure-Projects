@@ -1,0 +1,7 @@
+let findLongestStr = (arr) => {
+    let elemLengthArr = [];
+    for (let i = 0; i < arr.length; i++) {
+        elemLengthArr.push(arr[i].length)
+    }
+    return Math.max(...elemLengthArr);
+}
