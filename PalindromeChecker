@@ -1,13 +1,8 @@
 const palindromeChecker = (str) => {
     let strArr = str.split("");
-    let result;
     if (strArr.join("") === strArr.reverse().join("")) {
-        result = true;
-        console.log(result);
         return true;
     } else {
-        result = false;
-        console.log(result);
         return false;
     }
 }
