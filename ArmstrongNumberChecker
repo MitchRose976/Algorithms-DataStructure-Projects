@@ -1,0 +1,13 @@
+let armstrongNumberChecker = (num) => {
+    let numAsString = num.toString();
+    let n = num.toString().length;
+    let result = 0;
+    for (let i = 0; i < numAsString.length; i++) {
+        result = result + Math.pow(numAsString[i], n);
+    }
+    if (result === num) {
+        return true;
+    } else {
+        return false;
+    }
+}
