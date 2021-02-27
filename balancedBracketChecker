@@ -1,0 +1,14 @@
+let balancedBracesChecker = (str) => {
+    if (str.includes("(") && str.includes(")") ||
+    str.includes(")") && str.includes("(")) {
+        return true;
+    } else if (str.includes("[") && str.includes("]") ||
+    str.includes("]") && str.includes("[")) {
+        return true;
+    } else if (str.includes("{") && str.includes("}") ||
+    str.includes("}") && str.includes("{")) {
+        return true;
+    } else {
+        return false;
+    }
+}
