@@ -1,0 +1,31 @@
+const likes = (arr) => {
+    let arrLength = arr.length;
+    let result;
+    switch(arrLength) {
+        case 0:
+            result = "no one likes this";
+            console.log(result);
+            return result;
+            break;
+        case 1:
+            result = `${arr[0]} likes this`;
+            console.log(result);
+            return result;
+            break;
+        case 2: 
+            result = `${arr[0]} and ${arr[1]} like this`;
+            console.log(result);
+            return result;
+            break;
+        case 3:
+            result = `${arr[0]}, ${arr[1]} and ${arr[2]} like this`;
+            console.log(result);
+            return result;
+            break;
+        default:
+            result = `${arr[0]}, ${arr[1]} and ${arrLength - 2} others like this`;
+            console.log(result);
+            return result;
+            break;
+    }
+}
