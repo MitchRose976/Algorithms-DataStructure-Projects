@@ -1,0 +1,24 @@
+const findOdd = (arr) => {
+    let occurences;
+    let result;
+    //use reduce to get the count of occurences of each integer in array 
+    let numArr = arr.reduce((acc, val) => {
+        if (val in acc) {
+          acc[val]++
+        }
+        else {
+          acc[val] = 1
+        }
+        return acc
+      }, {});
+
+    occurences = Object.entries(numArr);
+    
+    //loops through array to find the integer with an odd number of occurence
+    for (let i = 0; i < occurences.length; i++) {
+        if (occurences[i][1] % 2 !== 0) {
+            result = parseInt(occurences[i][0]);
+        }
+    }
+    return result;
+};
