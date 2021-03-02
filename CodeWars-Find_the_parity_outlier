@@ -1,0 +1,8 @@
+const findOutlier = (arr) => {
+    let evenArray = [];
+    let oddArray = [];
+    for (num in arr) {
+        arr[num] % 2 === 0 ? evenArray.push(arr[num]) : oddArray.push(arr[num]);  
+    } 
+    return evenArray.length > oddArray.length ? oddArray[0] : evenArray[0]    
+}
