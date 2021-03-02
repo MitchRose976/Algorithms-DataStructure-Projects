@@ -1,0 +1,19 @@
+const getTime = (seconds) => {
+    if (seconds > 359999 || seconds < 0) {
+      console.log("not a valid number");
+      return false;
+    } 
+    let HH = Math.floor(seconds / 3600);
+    let MM = Math.floor((seconds - HH * 3600) / 60);
+    let SS = (seconds - HH * 3600) - MM * 60;
+    if (HH < 10) {
+        HH = "0" + HH;
+    } 
+    if (MM < 10) {
+        MM = "0" + MM;
+    } 
+    if (SS < 10) {
+        SS = "0" + SS;
+    }
+    return `${HH}:${MM}:${SS}`;
+};
