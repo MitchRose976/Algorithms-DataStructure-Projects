@@ -1,0 +1,14 @@
+const iqTest = (numbers) => {
+    let numbersArr = numbers.split(" ");
+    let evenArray = [];
+    let oddArray = [];
+    let oddNum;
+    //sorts numbers in to odd and even arrays 
+    for (let i = 0; i < numbersArr.length; i++) {
+        numbersArr[i] % 2 === 0 ? evenArray.push(numbersArr[i]) : oddArray.push(numbersArr[i]);
+    }
+    //checks which array has a length of 1 (our odd number)
+    evenArray.length > oddArray.length ? oddNum = oddArray[0] : oddNum = evenArray[0];
+
+    return numbersArr.indexOf(oddNum) + 1;
+}
