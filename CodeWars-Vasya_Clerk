@@ -1,0 +1,34 @@
+const tickets = (customerCash) => {
+    let cashOnHand = {
+        25: 0,
+        50: 0,
+        100: 0,
+    };
+    let customersServed = 0; 
+    for (let i = 0; i < customerCash.length; i++) {
+        if (customerCash[i] === 25) {
+            customersServed++;
+            cashOnHand[25]++;
+        } else if (customerCash[i] === 50 && cashOnHand[25] >= 1) {
+            customersServed++;
+            cashOnHand[25]--;
+            cashOnHand[50]++;
+        } else if (customerCash[i] === 100 && cashOnHand[25] >= 1 && cashOnHand[50] >= 1) {
+            customersServed++;
+            cashOnHand[25] -= 1;
+            cashOnHand[50]--;
+            cashOnHand[100]++;
+        } else if (customerCash[i] === 100 && cashOnHand[25] === 3) {
+            customersServed++;
+            cashOnHand[25] -= 3;
+            cashOnHand[100]++;
+        } else {
+            break;
+        }
+    }
+    if (customersServed >= customerCash.length) {
+        return "YES";
+    } else {
+        return "NO";
+    }
+}
