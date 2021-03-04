@@ -1,0 +1,35 @@
+const deleteNth = (arr, n) => {
+    let oddNum = [];
+    let search;
+    let count;
+
+    //counts number of each occurence
+    let numArr = arr.reduce((acc, val) => {
+        val in acc ? acc[val]++ : acc[val] = 1;
+        return acc
+    }, {});
+
+    
+    //pushes all occurences > n to seperate array
+    for (item in numArr) {
+        numArr[item] > n ? oddNum.push([item, numArr[item]]) : item++;
+    }
+
+    
+    //while occurences > n, loop through arr and delete extra
+    for (item in oddNum) {
+        //search = number to find
+        search = parseInt(oddNum[item][0]);
+        //count = number of occurences of search
+        count = oddNum[item][1];
+        while (count > n) {
+            for (let i = arr.length - 1; i >= 0; i--) {
+                if (arr[i] === search && count > n) {
+                    arr.splice(i, 1);
+                    count--;
+                }    
+            }
+        }      
+    }    
+    return arr;
+}
