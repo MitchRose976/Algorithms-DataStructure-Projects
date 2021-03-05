@@ -1,0 +1,7 @@
+const digital_root = (n) => {
+    let num = n.toString().split("").map(item => parseInt(item)).reduce((acc, val) =>  acc + val);
+    while (num > 9) {
+        num = num.toString().split("").map(item => parseInt(item)).reduce((acc, val) =>  acc + val);
+    } 
+    return num;
+}
