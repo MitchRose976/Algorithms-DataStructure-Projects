@@ -1,0 +1,14 @@
+const isValidWalk = (walk) => {
+    let result;
+    if (walk.length !== 10) {
+        return false;
+    } else {
+        let directionsArray = walk.reduce((acc, val) => {
+            val in acc ? acc[val]++ : acc[val] = 1;
+            return acc
+            }, {});
+        directionsArray["e"] === directionsArray["w"] && directionsArray["n"] === directionsArray["s"] 
+        ? result = true : result = false;
+        return result;
+    } 
+}
