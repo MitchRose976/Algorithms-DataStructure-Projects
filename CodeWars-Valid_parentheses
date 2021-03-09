@@ -1,0 +1,14 @@
+const validParentheses = (parens) => {
+    let result;
+    let parensArray = parens.split("");
+    let fullParentheses = [];
+    for (let i = 0; i < parensArray.length; i++) {
+        while (parensArray[i] === "(" && parensArray[i + 1] === ")") {
+            fullParentheses.push(parensArray[i], parensArray[i + 1])
+            parensArray.splice(i, 2);
+            i = 0;
+        }
+    }
+    parensArray.length === 0 ? result = true : result = false; 
+    return result;
+};
