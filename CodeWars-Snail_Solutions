@@ -1,0 +1,38 @@
+const snail = (array) => {
+    //the answer will always start with the first element of the passed array
+    let result = [array[0]];
+    //to use as a length checker for final answer
+    let lengthCheck = array.reduce((a, b) => {
+        return a.concat(b);
+    }).length;
+    //loops through array and pushes values to result in clockwise pattern then removes them.
+    //Continues until answer is found
+    while (array.length > 1) {
+        for (let i = 0; i < array.length; i++) {
+            if (i !== 0 && i !== array.length - 1) {
+                result.push(array[i][array[i].length - 1]);
+                array[i].pop();
+            }
+        }
+        result.push(array[array.length - 1].reverse());
+        for (let i = array.length - 1; i >= 0; i--) {
+            if (i !== 0 && i !== array.length - 1) {
+                result.push(array[i][0]);
+                array[i].shift();
+            } 
+        }
+        result.push(array[1]);
+        array.shift();
+        array.pop();
+    };
+    //flattens array
+    let answer = result.reduce((a, b) => {
+        return a.concat(b);
+    });
+    //checks length of final answer and original array length
+    while (answer.length > lengthCheck) {
+        answer.pop();
+    };
+  
+    return answer;
+};
