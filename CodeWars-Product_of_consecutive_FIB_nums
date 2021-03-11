@@ -1,0 +1,14 @@
+const productFib = (prod) => {
+    let fibonacciArray = [0, 1];
+    let fib1 = 0;
+    let fib2 = 1;
+    let result = []; 
+    while (fib1 * fib2 < prod) {
+        fibonacciArray.push(fib1 + fib2);
+        fib1 = fibonacciArray[fibonacciArray.length - 2];
+        fib2 = fibonacciArray[fibonacciArray.length - 1];
+    }
+    fib1 * fib2 === prod ? result.push(fib1, fib2, true) : result.push(fib1, fib2, false);
+    //console.log("prod:", prod, "fib1:", fib1, "fib2:", fib2, "fuckonacciArray:", fibonacciArray, "result:", result); 
+    return result;
+};
