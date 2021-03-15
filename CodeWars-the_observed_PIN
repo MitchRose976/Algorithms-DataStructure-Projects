@@ -1,0 +1,99 @@
+const getPINs = (o) => {
+    let combos = [];
+    let result;
+    for (var i = 0; i < o.length; i++) {
+        if (combos.length === 0) {
+            switch (o[i]) {
+                case "0":
+                    combos.push("0", "8");
+                    break;
+                case "1":
+                    combos.push("1", "2", "4");
+                    break;
+                case "2":
+                    combos.push("1", "2", "3", "5");
+                    break;
+                case "3":
+                    combos.push("2", "3", "6");
+                    break;
+                case "4":
+                    combos.push("1", "4", "5", "7");
+                    break;
+                case "5":
+                    combos.push("2", "4", "5", "6", "8");
+                    break;
+                case "6":
+                    combos.push("3", "5", "6", "9");
+                    break;
+                case "7":
+                    combos.push("4", "7", "8");
+                    break;
+                case "8":
+                    combos.push("0", "5", "7", "8", "9");
+                    break;
+                case "9":
+                    combos.push("6", "8", "9");
+                    break;
+                default:
+                    break;
+            } 
+        } else {
+            switch (o[i]) {
+                case "0":
+                    combos.forEach(i => {
+                        combos.push(i + "0", i + "8")
+                    });
+                    break;
+                case "1":
+                    combos.forEach(i => {
+                        combos.push(i + "1", i + "2", i + "4")
+                    });
+                    break;
+                case "2":
+                    combos.forEach(i => {
+                        combos.push(i + "1", i + "2", i + "3", i + "5")
+                    });
+                    break;
+                case "3":
+                    combos.forEach(i => {
+                        combos.push(i + "2", i + "3", i + "6")
+                    });
+                    break;
+                case "4":
+                    combos.forEach(i => {
+                        combos.push(i + "1", i + "4", i + "5", i + "7")
+                    });
+                    break;
+                case "5":
+                    combos.forEach(i => {
+                        combos.push(i + "2", i + "4", i + "5", i + "6", i + "8")
+                    });
+                    break;
+                case "6":
+                    combos.forEach(i => {
+                        combos.push(i + "3", i + "5", i + "6", i + "9")
+                    });
+                    break;
+                case "7":
+                    combos.forEach(i => {
+                        combos.push(i + "4", i + "7", i + "8")
+                    });
+                    break;
+                case "8":
+                    combos.forEach(i => {
+                        combos.push(i + "0", i + "5", i + "7", i + "8", i + "9")
+                    });
+                    break;
+                case "9":
+                    combos.forEach(i => {
+                        combos.push(i + "6", i + "8", i + "9")
+                    });
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    result = combos.filter(num => num.length === o.length);
+    return result;
+};
