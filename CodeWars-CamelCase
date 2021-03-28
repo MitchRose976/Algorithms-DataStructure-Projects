@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <string.h>
+#include <ctype.h>
+
+char *camel_case(const char *s)
+{
+    int i, j, index, len = strlen(s);
+    char *newWord = malloc(sizeof(len));
+    strcpy(newWord, s);
+    
+    /* Capitalize all letters after a space */
+    for (i = 0; i < len; i++) {
+        if (s[i] == ' ') {
+            index = i;
+            newWord[index + 1] = toupper(newWord[index + 1]);
+        }
+    }
+    
+    /* Remove Whitespace */
+    for (i = 0; i < len; i++) {
+        if (newWord[i] == ' ') {
+            for (j = i; j < len; j++) {
+                newWord[j] = newWord[j + 1];
+            }
+            i--;
+        }
+    }
+
+    /* Capitalize first letter  */
+    newWord[0] = toupper(newWord[0]);
+    
+
+    printf("str: %s\n", newWord);
+    return newWord;
+}
