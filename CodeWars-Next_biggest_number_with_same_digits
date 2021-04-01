@@ -1,0 +1,52 @@
+const nextBigger = (n) => {
+
+    let nReverse = n.toString().split("").reverse();
+    let leftOverArr = [];
+    let biggerNums;
+    let result;
+
+    //loop backwards through n with nReverse
+    for (let i = 0; i < nReverse.length; i++) {
+        //find index to replace 
+        //splice off all values trailing the index to replace and store in leftOverArr
+        //now index 0 of nReverse is the number being replaced
+        if (nReverse[i] > nReverse[i + 1]) {           
+            leftOverArr.push(nReverse[i]);
+            nReverse.splice(0, i + 1);
+            break;
+        } else {
+            leftOverArr.push(nReverse[i]);
+        }
+    };
+
+    //filter leftovers by numbers bigger than number being replaced
+    biggerNums = leftOverArr.filter(num => num > nReverse[0]);
+    biggerNums.sort((a, b) => a - b);
+
+    //remove replacement number from the leftoverarray
+    for (let i = 0; i < leftOverArr.length; i++) {
+        if (biggerNums[0] === leftOverArr[i]) {
+            leftOverArr.splice(i, 1);
+            break;
+        }
+    };
+
+    //sort remainder of leftovers from least to greatest 
+    //this will make sure the result is the next lowest value
+    leftOverArr.push(nReverse[0]);
+    leftOverArr.sort((a, b) => a - b);
+
+    //replace number at index 0 of nReverse with replacement number
+    //the replacement number is the next largest number of all the numbers before it
+    nReverse[0] = biggerNums[0];
+
+    //attach the sorted leftover values to the end of nReverse
+    result = parseInt(nReverse.reverse().concat(leftOverArr).join("")); 
+    
+    //check that result is greater than n and lengths are same
+    if (result <= n || result.toString().length > n.toString().length) {
+        return -1;
+    } else {
+        return result;
+    }   
+};
