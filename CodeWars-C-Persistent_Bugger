@@ -1,0 +1,43 @@
+int persistence(int n) {
+
+    int i, count = 0;
+    int iterationCount = 0;
+    int array[20];
+
+    if (n < 10) {
+        return 0;
+    }
+
+    /* Checks if n is single digit and returns answer */
+    do {
+      
+       /* Split n in to single digits */
+        while (n > 0) {
+            array[count] = n % 10;
+            n /= 10;
+            count++;
+        }
+        /* Sets stopping condition to a 2 digit integer after last element */
+        array[count] = 11;
+
+        /* multiplies every element of array and returns product */
+        int result = 1;
+        for (i = 0; i < 20; i++) {
+            /* checks for stop condition of 11 that was set above*/
+            if (array[i] > 9)
+                break;
+            else
+                printf("Elements: %d\n", array[i]);
+                result *= array[i];
+        }
+
+        /* Resets for next iteration */
+        n = result;
+        result = 1;
+        count = 0;
+        iterationCount++;
+    }
+    while (n > 9);
+
+    return iterationCount;
+}
