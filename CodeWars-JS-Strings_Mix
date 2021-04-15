@@ -1,0 +1,84 @@
+function mix(s1, s2) {
+
+    let s1Sorted = [];
+    let s2Sorted = [];
+    let sameValues = [];
+    let result = [];
+    let joinedStrings;
+
+    //split strings in to arrays of only lowercase letters
+    let s1Split = s1.split("").filter(char => /[a-z]/.test(char));
+    let s2Split = s2.split("").filter(char => /[a-z]/.test(char));
+
+    //count number of occurences of each letter
+    let s1LetterCount = s1Split.reduce((acc, val) => {
+        val in acc ? acc[val]++ : acc[val] = 1;
+        return acc
+    }, {});
+
+    let s2LetterCount = s2Split.reduce((acc, val) => {
+        val in acc ? acc[val]++ : acc[val] = 1;
+        return acc
+    }, {});
+    
+    //filters out occurences of 1 and pushes to an array
+    for (let letter in s1LetterCount) {
+        if (s1LetterCount[letter] > 1) {
+            s1Sorted.push([1 ,letter, s1LetterCount[letter]]);
+        }
+    }
+
+    for (let letter in s2LetterCount) {
+        if (s2LetterCount[letter] > 1) {
+            s2Sorted.push([2, letter, s2LetterCount[letter]]);
+        }
+    }
+
+    //sort values of same letter and # of occurences in to separate array
+    //if same letter appears in both strings, deletes the one with less occurences
+    for (let i = 0; i < s1Sorted.length; i++) {
+        for (let j = 0; j < s2Sorted.length; j++) {
+            if (s1Sorted[i] === undefined || s2Sorted[j] === undefined) {
+                break;
+            } else if (s2Sorted[j][1] == s1Sorted[i][1] && s2Sorted[j][2] == s1Sorted[i][2]) {
+                s2Sorted[j][0] = 3;
+                sameValues.push(s2Sorted[j]);
+                s1Sorted.splice(i, 1);
+                s2Sorted.splice(j, 1);
+                i--;
+            } else if (s1Sorted[i][1] === s2Sorted[j][1]) {
+                s1Sorted[i][2] > s2Sorted[j][2] ? s2Sorted.splice(j, 1) : s1Sorted.splice(i, 1);
+            }      
+        }
+    }
+
+    joinedStrings = s1Sorted.concat(s2Sorted).concat(sameValues);
+
+    //sort joinedStrings by:
+        //1. # of occurences
+        //2. s1 strings first, s2 strings second
+        //3. by letter
+    joinedStrings.sort((a, b) => {
+        return b[2] - a[2] || a[0] - b[0] || a[1].localeCompare(b[1]);
+    });
+
+    //converts all items in joinedStrings to proper format
+    for (let i = 0; i < joinedStrings.length; i++) {  
+        if (joinedStrings[i][0] == 1) {
+            result.push([`1:${joinedStrings[0][1].repeat(joinedStrings[0][2])}/`]);
+            joinedStrings.splice(i, 1);
+            i--;
+        } else if (joinedStrings[i][0] == 2) {
+            result.push([`2:${joinedStrings[0][1].repeat(joinedStrings[0][2])}/`]);
+            joinedStrings.splice(i, 1);
+            i--;
+        } else if (joinedStrings[i][0] == 3) {
+            result.push([`=:${joinedStrings[0][1].repeat(joinedStrings[0][2])}/`]);
+            joinedStrings.splice(i, 1);
+            i--;
+        }
+    }
+
+    result = result.join("");
+    return result.substring(0, result.length - 1);
+}
