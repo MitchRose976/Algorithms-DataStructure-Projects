@@ -1,0 +1,37 @@
+char* DuplicateEncoder(char * string)
+{
+    //grab length of parameter string
+    int length = strlen(string);
+    printf("length: %d\n", length);
+    //create a seperate variable with copy of input string for reference
+    char name[length];
+    strcpy(name, string);
+    //create a result variable that will be edited for the final answer
+    char* result = malloc(length + 1 * sizeof(char));
+    //create a position variable that will hold each character individually while looping and counting its # of occurences
+    int position = 0;
+    //create a counter variable to count occurence of each character
+    int count = 0;
+    //convert string to lowercase
+    for (int i = 0; i < length; i++) {
+        name[i] = tolower(name[i]);
+    }
+    //use position to hold character one at a time while counting # of occurences
+    while (position != length) {
+        for (int i = 0; i < length; i++) {
+            if (name[position] == name[i]) {
+                count++;
+            }
+        }
+        if (count == 1) {
+            result[position] = '(';
+        } else {
+            result[position] = ')';
+        }
+        //When for loop finishes, move to next letter and restart counter
+        position++;
+        count = 0;
+    }
+    result[length] = '\0';
+    return result;
+}
